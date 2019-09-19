@@ -1,8 +1,8 @@
 import requests, json, sys, pickle, urllib3, os
 
 BOT_URL = 'https://api.telegram.org/bot951165628:AAEGyfy3tK5enLaN_rSaDvOW5-hn97UZ5AY/'
-#group_chat_id = '-1001423004582'
-group_chat_id = '543935138'
+group_chat_id = '-1001423004582'
+#group_chat_id = '543935138'
 dev_chat_id = '543935138'
 cookieFile = 'cookies.dmp'
 appkeyFile = 'appKey.dmp'
