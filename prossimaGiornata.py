@@ -14,7 +14,7 @@ response = session.get('http://api.football-data.org/v2/competitions/SA/matches?
 data = response.json()
 if not 'matches' in data:
     utils.exitWithMessage(session, 'ProssimoMatch Error: No matches key in json')
-
+    
 matches = data['matches']
 if len(matches) == 0:
     sys.exit()
@@ -38,4 +38,3 @@ else:
     sys.exit()
 
 utils.sendMessage(session, message)
-
