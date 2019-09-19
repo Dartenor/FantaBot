@@ -81,7 +81,7 @@ def sendMessage(session, message):
     
 def getMercatoId(session):
     try:
-        response = session.get('https://leghe.fantacalcio.it/fantaoverit/area-gioco/mercato-buste', verify=False)
+        response = session.get('https://leghe.fantacalcio.it/fantaoverit/area-gioco/mercato-buste', allow_redirects=False, verify=False)
         if response.status_code == 302:
             return -2
         
