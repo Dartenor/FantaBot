@@ -8,8 +8,8 @@ session.headers.update({'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64;
 session.headers.update({'X-Auth-Token': '5da64a93bc7d44deb43c5a5503cccabe'})
 
 today = datetime.today()
-tomorrow = datetime.today() + timedelta(days=1) 
-response = session.get('http://api.football-data.org/v2/competitions/SA/matches?status=SCHEDULED&dateFrom=' + today.strftime('%Y-%m-%d') + '&dateTo=' + tomorrow.strftime('%Y-%m-%d'))
+tomorrow = today + timedelta(days=1) 
+response = session.get('http://api.football-data.org/v2/competitions/SA/matches?dateFrom=' + today.strftime('%Y-%m-%d') + '&dateTo=' + tomorrow.strftime('%Y-%m-%d'))
 
 data = response.json()
 if not 'matches' in data:
@@ -19,6 +19,21 @@ matches = data['matches']
 if len(matches) == 0:
     sys.exit()
 
+matchDay = matches[0]['matchday']
+response = session.get('http://api.football-data.org/v2/competitions/SA/matches?matchday=' + str(matchDay))
+
+data = response.json()
+if not 'matches' in data:
+    utils.exitWithMessage(session, 'ProssimoMatch Error: No matches key in json')
+    
+matches = data['matches']
+if len(matches) == 0:
+    sys.exit()
+
+matchStatus = matches[0]['status']
+if matchStatus != 'SCHEDULED':
+    sys.exit()
+    
 dateString = matches[0]['utcDate']
 dateMatch = datetime.strptime(dateString, '%Y-%m-%dT%H:%M:%S%z')
 timezone = pytz.timezone('Europe/Rome')
