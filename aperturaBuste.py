@@ -5,10 +5,10 @@ START_TIME = TIME_NOW - (5 * 60 * 1000)
 mercato_id = '0'
 
 def apriBuste(session, firstTime):
-    mercato_id = utils.getMercatoId(session)
-    if mercato_id == -2:
+    mercato_id = utils.getMercatoId(session, False)
+    if mercato_id == utils.REDIRECT:
         return False
-    elif mercato_id == -1:
+    elif mercato_id == utils.MERCATO_NON_TROVATO:
         return True
         
     try:

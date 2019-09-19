@@ -5,10 +5,10 @@ START_TIME = TIME_NOW - (5 * 60 * 1000)
 mercato_id = '0'
 
 def cercaSvincolati(session, firstTime): 
-    mercato_id = utils.getMercatoId(session)
-    if mercato_id == -2:
+    mercato_id = utils.getMercatoId(session, True)
+    if mercato_id == utils.REDIRECT:
         return False
-    elif mercato_id == -1:
+    elif mercato_id == utils.MERCATO_NON_TROVATO:
         return True
 
     try:

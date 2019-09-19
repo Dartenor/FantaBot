@@ -6,6 +6,8 @@ group_chat_id = '543935138'
 dev_chat_id = '543935138'
 cookieFile = 'cookies.dmp'
 appkeyFile = 'appKey.dmp'
+MERCATO_NON_TROVATO = -1
+REDIRECT = -99
 
 def save_cookies(session):
     with open(cookieFile, 'wb') as f:
@@ -79,22 +81,22 @@ def sendMessage(session, message):
     }
     session.post(BOT_URL + 'sendMessage', json=json_data, verify=False)
     
-def getMercatoId(session):
+def getMercatoId(session, redirect):
     try:
-        response = session.get('https://leghe.fantacalcio.it/fantaoverit/area-gioco/mercato-buste', allow_redirects=False, verify=False)
+        response = session.get('https://leghe.fantacalcio.it/fantaoverit/area-gioco/mercato-buste', allow_redirects=redirect, verify=False)
         if response.status_code == 302:
-            return -2
+            return REDIRECT
         
         if response.status_code != 200:
            exitWithMessage(session,'Error during retrieve list phase:\n' + response.text)
             
         indexStart = response.text.find('Object moved')
         if indexStart >= 0:
-            return -2
+            return REDIRECT
         
         indexStart = response.text.find('id_mercato')    
         if indexStart < 0:
-            return -1   
+            return MERCATO_NON_TROVATO   
         
         indexEnd = response.text.find(',', indexStart) 
         
