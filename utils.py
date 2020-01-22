@@ -4,8 +4,8 @@ BOT_URL = 'https://api.telegram.org/bot951165628:AAEGyfy3tK5enLaN_rSaDvOW5-hn97U
 group_chat_id = '-1001423004582'
 #group_chat_id = '543935138'
 dev_chat_id = '543935138'
-cookieFile = 'cookies.dmp'
-appkeyFile = 'appKey.dmp'
+cookieFile = '/home/pi/FantaBot/cookies.dmp'
+appkeyFile = '/home/pi/FantaBot/appKey.dmp'
 MERCATO_NON_TROVATO = -1
 REDIRECT = -99
 
@@ -54,7 +54,7 @@ def exitWithMessage(session, message):
         "text": message,
     }
     session.post(BOT_URL + 'sendMessage', json=json_data, verify=False)
-#    print(message)
+#   print(message)
     sys.exit()
     
 def login(session):    
@@ -65,7 +65,7 @@ def login(session):
         save_appkey(app_key)    
         session.headers.update({'app_key': app_key})
 
-        jsonLogin = {'password':'Dartenor;85','username':'Daniele_BO'}
+        jsonLogin = {'password':'Dartenor;0122','username':'Daniele_BO'}
         response = session.put('https://leghe.fantacalcio.it/api/v1/v1_utente/login?alias_lega=fantaoverit',json=jsonLogin, verify=False)
         if response.status_code != 200:
             exitWithMessage(session, 'Error during login phase:\n' + response.text)

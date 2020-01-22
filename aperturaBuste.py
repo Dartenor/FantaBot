@@ -15,7 +15,7 @@ def apriBuste(session, firstTime):
         response = session.get('https://leghe.fantacalcio.it/servizi/V1_LegheMercatoMovimenti/lista?alias_lega=fantaoverit&id_mercato=' + str(mercato_id) + '&page_size=5000&page=0', verify=False)
         if response.status_code != 200:
             utils.exitWithMessage(session,'Error during retrieve list phase:\n' + response.text)
-            
+        
         data = json.loads(response.text)
         if not data['error_msgs'] is None and firstTime:
             return False
@@ -30,7 +30,7 @@ def apriBuste(session, firstTime):
         if movimentiAll[i]['tipo'] == 6 and movimentiAll[i]['data'] > START_TIME:
             movimentiBuste.append(movimentiAll[i])
             
-    with open("fantateams.json",'r') as teamFile:    
+    with open("/home/pi/FantaBot/fantateams.json",'r') as teamFile:    
         teams = json.load(teamFile)
 
     for movimento in movimentiBuste:

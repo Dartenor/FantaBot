@@ -1,7 +1,7 @@
 import requests, json, time, utils
 
 TIME_NOW = int(time.time() * 1000)
-START_TIME = TIME_NOW - (5 * 60 * 1000)
+START_TIME = TIME_NOW - (15 * 60 * 1000)
 mercato_id = '0'
 
 def cercaSvincolati(session, firstTime): 
@@ -30,7 +30,7 @@ def cercaSvincolati(session, firstTime):
         if movimentiAll[i]['tipo'] == 1 and movimentiAll[i]['data'] > START_TIME:
             movimentiBuste.append(movimentiAll[i])
             
-    with open("fantateams.json",'r') as teamFile:    
+    with open("/home/pi/FantaBot/fantateams.json",'r') as teamFile:    
         teams = json.load(teamFile)
 
     for movimento in movimentiBuste:

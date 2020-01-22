@@ -45,9 +45,9 @@ hoursTillMatch = (dateMatch - dateNow).total_seconds() / 60 / 60
 
 message = '\nRicordatevi di postare la formazione almeno 15 minuti prima'
 
-if hoursTillMatch > 23.5 and hoursTillMatch < 25.5:
+if hoursTillMatch > 23.5 and hoursTillMatch < 24.6:
     message = 'La prossima giornata inizierà domani alle ' + dateMatch.strftime('%H:%M') + message
-elif hoursTillMatch > 2.5 and hoursTillMatch < 4.5:
+elif hoursTillMatch > 2.5 and hoursTillMatch < 3.6:
     message = 'La prossima giornata inizierà OGGI alle ' + dateMatch.strftime('%H:%M') + message
 else:
     sys.exit()
